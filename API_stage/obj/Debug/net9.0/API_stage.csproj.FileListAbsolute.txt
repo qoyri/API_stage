@@ -131,3 +131,4 @@
 /run/media/qoyri/SSD de ouf/code/RiderProjects/API_stage/API_stage/obj/Debug/net9.0/API_stage.pdb
 /run/media/qoyri/SSD de ouf/code/RiderProjects/API_stage/API_stage/obj/Debug/net9.0/API_stage.genruntimeconfig.cache
 /run/media/qoyri/SSD de ouf/code/RiderProjects/API_stage/API_stage/obj/Debug/net9.0/ref/API_stage.dll
+/run/media/qoyri/SSD de ouf/code/RiderProjects/API_stage/API_stage/obj/Debug/net9.0/API_stage.sourcelink.json

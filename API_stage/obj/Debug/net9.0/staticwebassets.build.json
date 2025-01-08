@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "sYjHb8Ag4HzSITXErCFlYsc1OkPisMlVGTDLw8+s7Zc=",
+  "Source": "API_stage",
+  "BasePath": "_content/API_stage",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

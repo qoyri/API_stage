@@ -16,6 +16,10 @@ namespace API_stage.Models
         public DbSet<Role> Roles { get; set; }
         public DbSet<Candidature> Candidatures { get; set; }
 
+        public DbSet<Conversation> Conversations { get; set; }
+        
+        public DbSet<Message> Messages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -48,6 +52,30 @@ namespace API_stage.Models
                     .HasForeignKey(c => c.StageId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
+
+            // Définir les relations pour Conversation
+            modelBuilder.Entity<Conversation>()
+                .HasOne(c => c.Participant1)
+                .WithMany(u => u.ConversationsAsParticipant1)
+                .HasForeignKey(c => c.Participant1Id)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Conversation>()
+                .HasOne(c => c.Participant2)
+                .WithMany(u => u.ConversationsAsParticipant2)
+                .HasForeignKey(c => c.Participant2Id)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Définir les relations pour Message
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Envoyeur)
+                .WithMany(u => u.Messages)
+                .HasForeignKey(m => m.EnvoyeurId);
+
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Conversation)
+                .WithMany(c => c.Messages)
+                .HasForeignKey(m => m.ConversationId);
         }
     }
 }

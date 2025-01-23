@@ -8,5 +8,6 @@ namespace API_stage.DTO
         public string Contact { get; set; }
         public string Description { get; set; }
         public string? ImageData { get; set; } // Chaîne encodée en Base64
+        public int? UserId { get; set; } // Ajout du UserId (nullable au cas où il n'existe pas)
     }
 }

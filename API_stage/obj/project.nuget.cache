@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TO2mVZ6HHEc=",
+  "dgSpecHash": "+C+aHJ7a11w=",
   "success": true,
   "projectFilePath": "/run/media/qoyri/SSD de ouf/code/RiderProjects/API_stage/API_stage/API_stage.csproj",
   "expectedPackageFiles": [
@@ -47,6 +47,7 @@
     "/home/qoyri/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
     "/home/qoyri/.nuget/packages/npgsql/9.0.2/npgsql.9.0.2.nupkg.sha512",
     "/home/qoyri/.nuget/packages/npgsql.entityframeworkcore.postgresql/9.0.2/npgsql.entityframeworkcore.postgresql.9.0.2.nupkg.sha512",
+    "/home/qoyri/.nuget/packages/sixlabors.imagesharp/3.1.6/sixlabors.imagesharp.3.1.6.nupkg.sha512",
     "/home/qoyri/.nuget/packages/swashbuckle.aspnetcore/7.2.0/swashbuckle.aspnetcore.7.2.0.nupkg.sha512",
     "/home/qoyri/.nuget/packages/swashbuckle.aspnetcore.swagger/7.2.0/swashbuckle.aspnetcore.swagger.7.2.0.nupkg.sha512",
     "/home/qoyri/.nuget/packages/swashbuckle.aspnetcore.swaggergen/7.2.0/swashbuckle.aspnetcore.swaggergen.7.2.0.nupkg.sha512",

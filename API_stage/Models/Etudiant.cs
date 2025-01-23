@@ -10,12 +10,12 @@ namespace API_stage.Models
         public string Prenom { get; set; }
         public string Contact { get; set; }
         public string Promo { get; set; } // SIO ou SNIR
+        public string ReseauxSociaux { get; set; } // JSON ou une structure adaptée
 
-        public string ReseauxSociaux { get; set; } // JSON ou une structure adaptée (c'est mieux de la stocker sous forme de JSON).
+        public byte[]? ImageData { get; set; } // Image complète
+        public byte[]? ThumbnailData { get; set; } // Miniature
 
         public User? User { get; set; }
-
         public ICollection<Candidature>? Candidatures { get; set; } // Liste des candidatures faites par l'étudiant
-        
     }
 }

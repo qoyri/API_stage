@@ -55,6 +55,34 @@ namespace API_stage.Migrations
                     b.ToTable("Candidatures");
                 });
 
+            modelBuilder.Entity("API_stage.Models.Conversation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("EntrepriseId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Participant1Id")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Participant2Id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EntrepriseId");
+
+                    b.HasIndex("Participant1Id");
+
+                    b.HasIndex("Participant2Id");
+
+                    b.ToTable("Conversations");
+                });
+
             modelBuilder.Entity("API_stage.Models.Entreprise", b =>
                 {
                     b.Property<int>("Id")
@@ -82,6 +110,9 @@ namespace API_stage.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<byte[]>("ThumbnailData")
+                        .HasColumnType("bytea");
+
                     b.HasKey("Id");
 
                     b.ToTable("Entreprises");
@@ -99,6 +130,9 @@ namespace API_stage.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<byte[]>("ImageData")
+                        .HasColumnType("bytea");
+
                     b.Property<string>("Nom")
                         .IsRequired()
                         .HasColumnType("text");
@@ -115,12 +149,45 @@ namespace API_stage.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<byte[]>("ThumbnailData")
+                        .HasColumnType("bytea");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Nom", "Prenom", "Contact")
                         .IsUnique();
 
                     b.ToTable("Etudiants");
+                });
+
+            modelBuilder.Entity("API_stage.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Contenu")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("ConversationId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DateEnvoi")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("EnvoyeurId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConversationId");
+
+                    b.HasIndex("EnvoyeurId");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("API_stage.Models.Role", b =>
@@ -206,6 +273,9 @@ namespace API_stage.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("EntrepriseId")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("EtudiantId")
                         .HasColumnType("integer");
 
@@ -221,6 +291,8 @@ namespace API_stage.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EntrepriseId");
 
                     b.HasIndex("EtudiantId")
                         .IsUnique();
@@ -249,6 +321,48 @@ namespace API_stage.Migrations
                     b.Navigation("Stage");
                 });
 
+            modelBuilder.Entity("API_stage.Models.Conversation", b =>
+                {
+                    b.HasOne("API_stage.Models.Entreprise", null)
+                        .WithMany("Conversations")
+                        .HasForeignKey("EntrepriseId");
+
+                    b.HasOne("API_stage.Models.User", "Participant1")
+                        .WithMany("ConversationsAsParticipant1")
+                        .HasForeignKey("Participant1Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("API_stage.Models.User", "Participant2")
+                        .WithMany("ConversationsAsParticipant2")
+                        .HasForeignKey("Participant2Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Participant1");
+
+                    b.Navigation("Participant2");
+                });
+
+            modelBuilder.Entity("API_stage.Models.Message", b =>
+                {
+                    b.HasOne("API_stage.Models.Conversation", "Conversation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API_stage.Models.User", "Envoyeur")
+                        .WithMany("Messages")
+                        .HasForeignKey("EnvoyeurId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
+
+                    b.Navigation("Envoyeur");
+                });
+
             modelBuilder.Entity("API_stage.Models.Stage", b =>
                 {
                     b.HasOne("API_stage.Models.Entreprise", "Entreprise")
@@ -262,6 +376,10 @@ namespace API_stage.Migrations
 
             modelBuilder.Entity("API_stage.Models.User", b =>
                 {
+                    b.HasOne("API_stage.Models.Entreprise", "Entreprise")
+                        .WithMany()
+                        .HasForeignKey("EntrepriseId");
+
                     b.HasOne("API_stage.Models.Etudiant", "Etudiant")
                         .WithOne("User")
                         .HasForeignKey("API_stage.Models.User", "EtudiantId");
@@ -272,13 +390,22 @@ namespace API_stage.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Entreprise");
+
                     b.Navigation("Etudiant");
 
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("API_stage.Models.Conversation", b =>
+                {
+                    b.Navigation("Messages");
+                });
+
             modelBuilder.Entity("API_stage.Models.Entreprise", b =>
                 {
+                    b.Navigation("Conversations");
+
                     b.Navigation("Stages");
                 });
 
@@ -297,6 +424,15 @@ namespace API_stage.Migrations
             modelBuilder.Entity("API_stage.Models.Stage", b =>
                 {
                     b.Navigation("Candidatures");
+                });
+
+            modelBuilder.Entity("API_stage.Models.User", b =>
+                {
+                    b.Navigation("ConversationsAsParticipant1");
+
+                    b.Navigation("ConversationsAsParticipant2");
+
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

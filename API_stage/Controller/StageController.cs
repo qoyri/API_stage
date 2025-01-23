@@ -1,11 +1,12 @@
 using API_stage.Models;
 using API_stage.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API_stage.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class StagesController : ControllerBase
     {
@@ -56,6 +57,7 @@ namespace API_stage.Controllers
 
         // 2. Récupérer Tous les Stages (avec filtres)
         [HttpGet]
+        [Authorize(Roles = "Admin,Etudiant")]
         public async Task<ActionResult<IEnumerable<StageDTO>>> GetStages([FromQuery] string? statut,
             [FromQuery] int? entreprise_id, [FromQuery] int? etudiant_id)
         {

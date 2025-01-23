@@ -15,6 +15,7 @@
           "Microsoft.EntityFrameworkCore.Design": "9.0.0",
           "Microsoft.IdentityModel.Tokens": "8.3.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.2",
+          "SixLabors.ImageSharp": "3.1.6",
           "Swashbuckle.AspNetCore": "7.2.0",
           "System.IdentityModel.Tokens.Jwt": "8.3.0"
         },
@@ -600,6 +601,14 @@
           }
         }
       },
+      "SixLabors.ImageSharp/3.1.6": {
+        "runtime": {
+          "lib/net6.0/SixLabors.ImageSharp.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.1.6.0"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/7.2.0": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
@@ -1036,6 +1045,13 @@
       "sha512": "sha512-cYdOGplIvr9KgsG8nJ8xnzBTImeircbgetlzS1OmepS5dAQW6PuGpVrLOKBNEwEvGYZPsV8037X5vZ/Dmpwz7Q==",
       "path": "npgsql.entityframeworkcore.postgresql/9.0.2",
       "hashPath": "npgsql.entityframeworkcore.postgresql.9.0.2.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp/3.1.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dHQ5jugF9v+5/LCVHCWVzaaIL6WOehqJy6eju/0VFYFPEj2WtqkGPoEV9EVQP83dHsdoqYaTuWpZdwAd37UwfA==",
+      "path": "sixlabors.imagesharp/3.1.6",
+      "hashPath": "sixlabors.imagesharp.3.1.6.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/7.2.0": {
       "type": "package",
